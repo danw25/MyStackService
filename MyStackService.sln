@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyStackService", "MyStackService\MyStackService.csproj", "{DA4025A3-A8E4-41E5-85BB-AE1F33DB37C9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReversibleStackTests", "ReversibleStackTests\ReversibleStackTests.csproj", "{99CFE2E4-E94C-40BC-BEE5-2357317F389C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReversableStackApi", "ReversableStackApi\ReversableStackApi.csproj", "{28D1BA16-2A93-4533-A370-85E4D1C50896}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DA4025A3-A8E4-41E5-85BB-AE1F33DB37C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA4025A3-A8E4-41E5-85BB-AE1F33DB37C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA4025A3-A8E4-41E5-85BB-AE1F33DB37C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA4025A3-A8E4-41E5-85BB-AE1F33DB37C9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{99CFE2E4-E94C-40BC-BEE5-2357317F389C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{99CFE2E4-E94C-40BC-BEE5-2357317F389C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99CFE2E4-E94C-40BC-BEE5-2357317F389C}.Release|Any CPU.ActiveCfg = Release|Any CPU

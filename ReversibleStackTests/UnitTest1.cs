@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MyStackService.Models;
+using ReversableStackApi.Models;
 
 namespace ReversibleStackTests
 {
@@ -17,12 +17,12 @@ namespace ReversibleStackTests
             var input2 = "B";
             var input3 = "C";
 
-            var revStack = new ReversibleStack();
+            var revStack = new ReversibleStack<string>();
             revStack.Push(input);
             revStack.Push(input2);
             revStack.Push(input3);
 
-            var size = revStack.Count;
+
 
 
 
@@ -41,7 +41,7 @@ namespace ReversibleStackTests
             var input2 = "B";
             var input3 = "C";
 
-            IReversibleStack revStack = new ReversibleStack();
+            IReversibleStack<string> revStack = new ReversibleStack<string>();
             revStack.Push(input);
             revStack.Push(input2);
             revStack.Push(input3);
@@ -65,8 +65,8 @@ namespace ReversibleStackTests
 
             var stack = new Stack<string>();
             var queue  = new Queue<string>();
-            var revStack = new ReversibleStack();
-            var revStackFlipped = new ReversibleStack();
+            var revStack = new ReversibleStack<string>();
+            var revStackFlipped = new ReversibleStack<string>();
             
 
 
@@ -97,7 +97,7 @@ namespace ReversibleStackTests
             var input2 = "B";
             var input3 = "C";
             var input4 = "D";
-            var revStack = new ReversibleStack();
+            var revStack = new ReversibleStack<string>();
 
             revStack.Push(input);
             revStack.Push(input2);
