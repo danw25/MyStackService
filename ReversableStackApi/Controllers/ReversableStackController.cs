@@ -97,7 +97,7 @@ namespace MyStackService.Controllers
             }
             catch (Exception)
             {
-                return ReportError("Revert");
+                return ReportError("VerifyOutput");
             }
             
         }
