@@ -22,18 +22,37 @@ namespace MyStackService.Controllers
         [HttpPost]
         public HttpResponseMessage Push([FromUri] string input)
         {
-            if(input==null)
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "input cannot be null");
+            try
+            {
+             if(input==null)
+                            return Request.CreateErrorResponse(HttpStatusCode.NotFound, "input cannot be null");
 
-            revStack.Push(input);
-            return Request.CreateResponse(HttpStatusCode.OK);
+                        revStack.Push(input);
+                        return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception)
+            {
+
+                return ReportError("Push");
+            }
+
+           
         }
 
         [Route("api/ReversibleStack/Pop")]
         [HttpGet]
         public HttpResponseMessage Pop()
         {
-            return VerifyOutput(revStack.Pop());
+            try
+            {
+                return VerifyOutput(revStack.Pop());
+            }
+            catch (Exception)
+            {
+
+               return ReportError("Pop");
+            }
+            
         }
 
 
@@ -41,22 +60,51 @@ namespace MyStackService.Controllers
         [HttpGet]
         public HttpResponseMessage Peak()
         {
-            return VerifyOutput(revStack.Peak());
+            try
+            {
+                return VerifyOutput(revStack.Peak());
+            }
+            catch (Exception)
+            {
+
+                return ReportError("Peak");
+            }
         }
         [Route("api/ReversibleStack/Revert")]
         [HttpGet]
         public void Revert()
         {
-            revStack.Revert();
+            try
+            {
+                revStack.Revert();
+            }
+            catch (Exception)
+            {
+                ReportError("Revert");
+            }
+            
         }
         private HttpResponseMessage VerifyOutput(string output)
         {
-            if (EqualityComparer<string>.Default.Equals(output, default(string)))
+            try
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Stack is empty");
+                if (EqualityComparer<string>.Default.Equals(output, default(string)))
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.NoContent, "Stack is empty");
 
+                }
+                return Request.CreateResponse<string>(HttpStatusCode.OK, output);
             }
-            return Request.CreateResponse<string>(HttpStatusCode.OK, output);
+            catch (Exception)
+            {
+                return ReportError("Revert");
+            }
+            
+        }
+
+        private HttpResponseMessage ReportError(string method)
+        {
+            return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, $"Error from {method}");
         }
     }
 }
