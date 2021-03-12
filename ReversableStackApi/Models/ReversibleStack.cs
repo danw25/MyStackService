@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Threading;
 
 namespace ReversableStackApi.Models
 {
@@ -65,11 +66,12 @@ namespace ReversableStackApi.Models
         private bool _isReversed;
         private Node<T> _head;
         private Node<T> _tail;
-        private object locker;
+        private ReaderWriterLockSlim stackLock;
 
         public ReversibleStack()
         {
-            locker = new object();
+            stackLock = new ReaderWriterLockSlim();
+  
         }
 
 
@@ -77,9 +79,10 @@ namespace ReversableStackApi.Models
 
         public void Push(T input)
         {
-            lock (locker)
+            try
             {
-                var node = new Node<T> (input);
+                stackLock.EnterWriteLock();
+                var node = new Node<T>(input);
                 if (Front == null) // stack is empty
                 {
                     _head = node;
@@ -98,15 +101,19 @@ namespace ReversableStackApi.Models
                     node.Next = _head;
                     _head = node;
                     _head.Prev = null;
-                } 
+                }
             }
-           
+            finally
+            {
+                stackLock.ExitWriteLock();
+            }          
         }
 
         public T Pop()
         {
-            lock (locker)
-            {
+            stackLock.EnterWriteLock();
+            try
+            {                
                 T res;
                 if (_head == null)
                     return default;
@@ -137,17 +144,30 @@ namespace ReversableStackApi.Models
 
                 return res; 
             }
+            finally
+            {
+                stackLock.ExitWriteLock();
+            }
+          
            
         }
 
         public T Peak()
         {
-            lock (locker)
+            stackLock.EnterReadLock();
+            try
             {
+                
                 if (_head == null)
                     return default;
+
                 return Front.Item;
             }
+            finally
+            {
+                stackLock.ExitReadLock();
+            }
+
            
         }
 
@@ -155,11 +175,15 @@ namespace ReversableStackApi.Models
 
         public void Revert()
         {
-            lock (locker)
+            stackLock.EnterWriteLock();
+            try
             {
-                 _isReversed = !_isReversed;
+                _isReversed = !_isReversed;
             }
-           
+            finally
+            {
+                stackLock.ExitWriteLock();
+            }                     
         }
     }
 
